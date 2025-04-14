@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  VERSION: $(( $(cat version.txt) + 1 ))
+
 jobs:
   build_push_supermario_docker_image:
     runs-on: ubuntu-latest
@@ -18,5 +21,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t docker.io/rewilliams10/supermariogitopsproject:1 .
-          docker push docker.io/rewilliams10/supermariogitopsproject:1
+          docker build -t docker.io/rewilliams10/supermariogitopsproject:${{ env.VERSION }} .
+          docker push docker.io/rewilliams10/supermariogitopsproject:${{ env.VERSION }}
